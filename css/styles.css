@@ -1,0 +1,402 @@
+/* ==========================================================================
+   1. VARIABLES GLOBALES Y RESET
+   ========================================================================== */
+:root {
+    /* Paleta de Colores HuertoHogar */
+    --color-primary: #2E8B57;       /* Verde Esmeralda (Acción principal) */
+    --color-secondary: #FFD700;     /* Amarillo Mostaza (Avisos / Promos) */
+    --color-accent: #8B4513;        /* Marrón Claro (Encabezados / Detalles) */
+    --color-bg: #F7F7F7;            /* Fondo Blanco Suave */
+    --color-surface: #FFFFFF;       /* Fondo de Tarjetas y Modales */
+    --color-text: #333333;          /* Texto principal */
+    --color-muted: #666666;         /* Texto secundario */
+    --color-danger: #D9534F;        /* Mensajes de error */
+
+    /* Tipografías */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Sombras y Bordes */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+    --radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+/* ==========================================================================
+   2. BOTONES Y COMPONENTES
+   ========================================================================== */
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background-color: #246B43;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+}
+
+/* ==========================================================================
+   3. ENCABEZADO Y NAVEGACIÓN
+   ========================================================================== */
+.main-header {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.brand-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.main-nav a {
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.cart-icon {
+    font-size: 1.2rem;
+    position: relative;
+}
+
+#cart-count {
+    background-color: var(--color-secondary);
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 50%;
+    position: absolute;
+    top: -8px;
+    right: -12px;
+}
+
+/* ==========================================================================
+   4. SECCIÓN HERO Y CATÁLOGO (GRID)
+   ========================================================================== */
+.hero-banner {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../img/hero-bg.jpg') center/cover no-repeat;
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    text-align: center;
+    padding: 5rem 1rem;
+}
+
+.hero-banner h1 {
+    color: var(--color-surface);
+    font-size: 2.5rem;
+}
+
+.hero-banner p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.catalog-section {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.filters-sidebar {
+    background-color: var(--color-surface);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    height: fit-content;
+}
+
+.filters-sidebar button {
+    background: none;
+    border: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--color-text);
+}
+
+.filters-sidebar button.active,
+.filters-sidebar button:hover {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.product-card img {
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    height: 160px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.product-card .price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0.5rem 0;
+}
+
+/* ==========================================================================
+   5. SUCURSALES Y FORMULARIOS
+   ========================================================================== */
+.branches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.branch-card {
+    background-color: var(--color-surface);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    border-left: 5px solid var(--color-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.custom-form {
+    background-color: var(--color-surface);
+    padding: 2rem;
+    border-radius: var(--radius);
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-sm);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 0.75rem;
+    border: 1px solid #CCCCCC;
+    border-radius: var(--radius);
+    font-family: inherit;
+}
+
+.error-msg {
+    color: var(--color-danger);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* ==========================================================================
+   6. PANEL DE ADMINISTRACIÓN Y PIE DE PÁGINA
+   ========================================================================== */
+.admin-header {
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header h2 {
+    color: var(--color-surface);
+    margin: 0;
+}
+
+.admin-container {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - 60px);
+}
+
+.admin-sidebar {
+    background-color: #2C3E50;
+    color: var(--color-surface);
+    padding: 1.5rem 1rem;
+}
+
+.admin-sidebar a {
+    color: #BDC3C7;
+    display: block;
+    padding: 0.75rem 0;
+}
+
+.admin-sidebar a.active,
+.admin-sidebar a:hover {
+    color: var(--color-surface);
+    font-weight: 600;
+}
+
+.admin-content {
+    padding: 2rem;
+}
+
+.main-footer {
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
+
+.main-footer a {
+    color: var(--color-secondary);
+}
+
+/* ==========================================================================
+   7. DISEÑO RESPONSIVO (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .catalog-section,
+    .admin-container {
+        grid-template-columns: 1fr;
+    }
+
+    .main-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
