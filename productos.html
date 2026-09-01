@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo de productos orgánicos y frescos de HuertoHogar.">
+    <title>HuertoHogar | Catálogo de Productos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="index.html"><img src="img/logo.png" alt="Logo HuertoHogar"></a>
+            <span class="brand-title">HuertoHogar</span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html" class="active">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="blogs.html">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="login.html" class="btn-secondary">Iniciar Sesión</a>
+            <a href="carrito.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Nuestros Productos Orgánicos</h1>
+        
+        <section class="catalog-section">
+            <aside class="filters-sidebar">
+                <h3>Categorías</h3>
+                <ul>
+                    <li><button class="filter-btn active" data-category="all">Todos</button></li>
+                    <li><button class="filter-btn" data-category="verduras">Verduras</button></li>
+                    <li><button class="filter-btn" data-category="frutas">Frutas</button></li>
+                    <li><button class="filter-btn" data-category="despensa">Despensa Orgánica</button></li>
+                </ul>
+            </aside>
+
+            <div class="products-grid" id="catalog-products-container">
+                <!-- Se cargará desde JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content container">
+            <p>&copy; 2026 HuertoHogar. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
