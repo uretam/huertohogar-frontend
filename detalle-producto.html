@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HuertoHogar | Detalle del Producto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="index.html"><img src="img/logo.png" alt="Logo HuertoHogar" class="logo-img"></a>
+            <span class="brand-title">HuertoHogar</span>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html" class="active">Productos</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="blogs.html">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="login.html" class="btn-secondary">Iniciar Sesión</a>
+            <a href="carrito.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="product-detail-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=500" alt="Manzanas Orgánicas" style="width: 100%; border-radius: 8px;">
+            <div>
+                <h1>Manzanas Orgánicas</h1>
+                <p class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--color-primary);">$2.500 / kg</p>
+                <p style="margin: 1rem 0;">Cosechadas de manera sustentable en valles locales. Libres de pesticidas y fertilizantes químicos.</p>
+                
+                <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+                    <label for="quantity">Cantidad (kg):</label>
+                    <input type="number" id="quantity" value="1" min="1" style="width: 60px; padding: 0.5rem;">
+                </div>
+                
+                <button class="btn-primary" onclick="addToCart(1)">Añadir al Carrito</button>
+            </div>
+        </article>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content container">
+            <p>&copy; 2026 HuertoHogar. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Gestión de Productos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="admin-body">
+    <header class="admin-header">
+        <h2>Panel Admin - Gestión de Productos</h2>
+        <a href="../index.html" class="btn-secondary">Volver a la Tienda</a>
+    </header>
+
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="productos.html" class="active">Gestión de Productos</a></li>
+                    <li><a href="usuarios.html">Gestión de Usuarios</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <h1>Lista de Productos Registrados</h1>
+            <p style="margin-bottom: 1rem;">Módulo preparado para operaciones CRUD (Evaluación 2).</p>
+            
+            <table style="width:100%; text-align:left; border-collapse:collapse; background:#fff; padding:1rem;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #ddd;">
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Manzanas Orgánicas</td><td>Frutas</td><td>$2.500</td></tr>
+                    <tr><td>2</td><td>Tomates Limachinos</td><td>Verduras</td><td>$1.800</td></tr>
+                    <tr><td>3</td><td>Miel Orgánica Natural</td><td>Despensa</td><td>$5.500</td></tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+</html>
