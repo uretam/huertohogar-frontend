@@ -7,13 +7,12 @@ function saveUsers(users) {
     localStorage.setItem('huerto_users', JSON.stringify(users));
 }
 
-// ===== Manejo de la sesión activa =====
+// ===== Manejo de la sesiÃ³n activa =====
 function getCurrentUser() {
     return JSON.parse(localStorage.getItem('huerto_session')) || null;
 }
 
 function setCurrentUser(user) {
-    // Nunca guardamos la contraseña en la sesión
     const { password, ...safeUser } = user;
     localStorage.setItem('huerto_session', JSON.stringify(safeUser));
 }
@@ -40,21 +39,21 @@ function registerUser(name, email, password) {
     return { ok: true };
 }
 
-// ===== Inicio de sesión =====
+// ===== Inicio de sesiÃ³n =====
 function loginUser(email, password) {
     const users = getUsers();
     const emailNormalized = email.trim().toLowerCase();
     const user = users.find(u => u.email === emailNormalized);
 
     if (!user || user.password !== password) {
-        return { ok: false, message: 'Correo o contraseña incorrectos.' };
+        return { ok: false, message: 'Correo o contraseÃ±a incorrectos.' };
     }
 
     setCurrentUser(user);
     return { ok: true };
 }
 
-// ===== Actualizar el encabezado según el estado de la sesión =====
+// ===== Actualizar la interfaz segÃºn la sesiÃ³n =====
 function updateAuthUI() {
     const userActions = document.querySelector('.user-actions');
     if (!userActions) return;
@@ -66,18 +65,23 @@ function updateAuthUI() {
     if (user) {
         loginLink.textContent = `Hola, ${user.name.split(' ')[0]}`;
         loginLink.href = '#';
-        loginLink.title = 'Cerrar sesión';
+        loginLink.title = 'Cerrar sesiÃ³n';
         loginLink.addEventListener('click', (e) => {
             e.preventDefault();
-            if (confirm('¿Cerrar sesión?')) logoutUser();
+            if (confirm('Â¿Cerrar sesiÃ³n?')) logoutUser();
         });
     }
 }
 
-// ===== Formulario de Registro =====
+// ===== Validaciones y Eventos de Formularios =====
 document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI();
 
+    // Expresiones regulares reutilizables
+    const nameRegex = /^[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“ÃšÃ±Ã‘\s]{3,50}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    // Formulario de Registro
     const registerForm = document.getElementById('register-form');
     if (registerForm) {
         registerForm.addEventListener('submit', (e) => {
@@ -91,24 +95,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let isValid = true;
 
-            if (name.trim().length < 3) {
-                document.getElementById('error-reg-name').textContent = 'El nombre debe tener al menos 3 caracteres.';
+            // ValidaciÃ³n de Nombre
+            if (!nameRegex.test(name.trim())) {
+                document.getElementById('error-reg-name').textContent = 'El nombre solo debe contener letras (mÃ­nimo 3) sin nÃºmeros.';
                 isValid = false;
             }
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // ValidaciÃ³n de Correo
             if (!emailRegex.test(email.trim())) {
-                document.getElementById('error-reg-email').textContent = 'Ingrese un correo electrónico válido.';
+                document.getElementById('error-reg-email').textContent = 'Ingrese un correo electrÃ³nico vÃ¡lido (ejemplo: usuario@gmail.com).';
                 isValid = false;
             }
 
+            // ValidaciÃ³n de ContraseÃ±a
             if (password.length < 6) {
-                document.getElementById('error-reg-password').textContent = 'La contraseña debe tener al menos 6 caracteres.';
+                document.getElementById('error-reg-password').textContent = 'La contraseÃ±a debe tener al menos 6 caracteres.';
                 isValid = false;
             }
 
+            // ConfirmaciÃ³n de ContraseÃ±a
             if (confirmPassword !== password) {
-                document.getElementById('error-reg-confirm-password').textContent = 'Las contraseñas no coinciden.';
+                document.getElementById('error-reg-confirm-password').textContent = 'Las contraseÃ±as no coinciden.';
                 isValid = false;
             }
 
@@ -120,12 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            alert('¡Cuenta creada con éxito! Bienvenido/a a HuertoHogar.');
+            alert('Â¡Cuenta creada con Ã©xito! Bienvenido/a a HuertoHogar.');
             window.location.href = 'index.html';
         });
     }
 
-    // ===== Formulario de Inicio de Sesión =====
+    // Formulario de Login
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
@@ -136,15 +143,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('login-password').value;
 
             let isValid = true;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (!emailRegex.test(email.trim())) {
-                document.getElementById('error-login-email').textContent = 'Ingrese un correo electrónico válido.';
+                document.getElementById('error-login-email').textContent = 'Ingrese un correo electrÃ³nico vÃ¡lido.';
                 isValid = false;
             }
 
             if (password.length === 0) {
-                document.getElementById('error-login-password').textContent = 'Ingrese su contraseña.';
+                document.getElementById('error-login-password').textContent = 'Ingrese su contraseÃ±a.';
                 isValid = false;
             }
 

@@ -14,16 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
             // Limpiar errores previos
             document.querySelectorAll('.error-msg').forEach(el => el.textContent = '');
 
-            // Validar Nombre
-            if (nameInput.value.trim().length < 3) {
-                document.getElementById('error-name').textContent = 'El nombre debe tener al menos 3 caracteres.';
+            // Validar Nombre (sin nÃºmeros, min 3 caracteres, permite acentos y Ã±)
+            const nameRegex = /^[a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃÃ‰ÃÃ“ÃšÃ±Ã‘\s]{3,50}$/;
+            if (!nameRegex.test(nameInput.value.trim())) {
+                document.getElementById('error-name').textContent = 'El nombre solo debe contener letras (mÃ­nimo 3) y no incluir nÃºmeros.';
                 isValid = false;
             }
 
-            // Validar Email con Expresión Regular
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            // Validar Email / Gmail
+            // Si requieres estricto solo @gmail.com cambia por: /^[a-zA-Z0-9.]+@gmail\.com$/i
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailRegex.test(emailInput.value.trim())) {
-                document.getElementById('error-email').textContent = 'Ingrese un correo electrónico válido.';
+                document.getElementById('error-email').textContent = 'Ingrese un correo electrÃ³nico vÃ¡lido (ejemplo: usuario@gmail.com).';
                 isValid = false;
             }
 
@@ -34,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (isValid) {
-                alert('¡Gracias por contactarnos! Tu mensaje ha sido enviado correctamente.');
+                alert('Â¡Gracias por contactarnos! Tu mensaje ha sido enviado correctamente.');
                 contactForm.reset();
             }
         });
