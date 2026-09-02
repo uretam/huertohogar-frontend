@@ -29,20 +29,9 @@
     </header>
 
     <main class="container">
-        <article class="product-detail-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
-            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=500" alt="Manzanas Orgánicas" style="width: 100%; border-radius: 8px;">
-            <div>
-                <h1>Manzanas Orgánicas</h1>
-                <p class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--color-primary);">$2.500 / kg</p>
-                <p style="margin: 1rem 0;">Cosechadas de manera sustentable en valles locales. Libres de pesticidas y fertilizantes químicos.</p>
-                
-                <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
-                    <label for="quantity">Cantidad (kg):</label>
-                    <input type="number" id="quantity" value="1" min="1" style="width: 60px; padding: 0.5rem;">
-                </div>
-                
-                <button class="btn-primary" onclick="addToCart(1)">Añadir al Carrito</button>
-            </div>
+        <article class="product-detail-layout" id="product-detail-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+            <!-- Se carga dinámicamente según el parámetro ?id= de la URL -->
+            <p>Cargando producto...</p>
         </article>
     </main>
 
@@ -54,5 +43,43 @@
 
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('product-detail-container');
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get('id') || 1; // 1 por defecto si se entra sin parámetro
+            const product = getProductById(productId);
+
+            if (!product) {
+                container.innerHTML = '<p>Producto no encontrado. <a href="productos.html">Volver al catálogo</a>.</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" style="width: 100%; border-radius: 8px;">
+                <div>
+                    <h1>${product.name}</h1>
+                    <p class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--color-primary);">
+                        $${product.price.toLocaleString('es-CL')} / kg
+                    </p>
+                    <p style="margin: 1rem 0;">${product.description}</p>
+
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+                        <label for="quantity">Cantidad (kg):</label>
+                        <input type="number" id="quantity" value="1" min="1" style="width: 60px; padding: 0.5rem;">
+                    </div>
+
+                    <button class="btn-primary" id="add-to-cart-btn">Añadir al Carrito</button>
+                </div>
+            `;
+
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                const quantityInput = document.getElementById('quantity');
+                const quantity = parseInt(quantityInput.value, 10) || 1;
+                addToCart(product.id, quantity);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -10,17 +10,20 @@ function saveCart(cart) {
 }
 
 // Agregar un producto al carrito
-function addToCart(productId) {
+function addToCart(productId, quantity = 1) {
+    quantity = Number(quantity);
+    if (!Number.isFinite(quantity) || quantity < 1) quantity = 1;
+
     const cart = getCart();
     const product = products.find(p => p.id === productId);
-    
+
     if (!product) return;
 
     const existingItem = cart.find(item => item.id === productId);
     if (existingItem) {
-        existingItem.quantity += 1;
+        existingItem.quantity += quantity;
     } else {
-        cart.push({ ...product, quantity: 1 });
+        cart.push({ ...product, quantity });
     }
 
     saveCart(cart);
@@ -99,6 +102,26 @@ function renderCartPage() {
     html += '</tbody></table>';
     cartTableContainer.innerHTML = html;
     if (cartTotalElement) cartTotalElement.textContent = `$${total.toLocaleString('es-CL')}`;
+}
+
+// Procesar el pago (botón "Proceder al Pago" en carrito.html)
+function checkout() {
+    const cart = getCart();
+    if (cart.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+    }
+
+    // Requiere que el usuario haya iniciado sesión (ver js/auth.js)
+    if (typeof getCurrentUser === 'function' && !getCurrentUser()) {
+        alert('Debes iniciar sesión para completar tu compra.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    alert('¡Compra realizada con éxito! Gracias por tu pedido.');
+    saveCart([]);
+    renderCartPage();
 }
 
 // Inicializar el badge al cargar cualquier página
